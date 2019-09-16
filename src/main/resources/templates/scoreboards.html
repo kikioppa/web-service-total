@@ -25,6 +25,7 @@
                 <th>Edit</th>
                 <th>Delete</th>  ..... -->
             </tr>
+            
             <p><a href="#" th:href="@{/scoreboard/new}">글쓰기</a></p>
             <tr th:each="scoreboard : ${scoreboards}">
                 <td th:text="${scoreboard.id}"><a href="/scoreboard/${scoreboard.id}">글번호</a></td>
