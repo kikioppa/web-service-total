@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Boot Exemple</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(scoreboards)}">
+        <h2>게시글 목록</h2>
+        <table class="table table-striped">
+        
+            <tr>
+            
+            	<th>글번호</th>
+                <th>분류</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>날짜</th>
+                <th>조회</th>
+               <!--  <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>  ..... -->
+            </tr>
+            <p><a href="#" th:href="@{/scoreboard/new}">글쓰기</a></p>
+            <tr th:each="scoreboard : ${scoreboards}">
+                <td th:text="${scoreboard.id}"><a href="/scoreboard/${scoreboard.id}">글번호</a></td>
+                <td th:text="${scoreboard.boardType}">분류</td>
+                <td><a th:href="${ '/scoreboard/' + scoreboard.id}" th:text="${scoreboard.title}"></a></td>
+                <td th:text="${scoreboard.name}">글쓴이</td>
+                <td th:text="${#dates.format(scoreboard.createdDate,'yy-MM-dd')}">날짜</td>
+               <!--  <td th:text="${scoreboard.name}">descirption</td>  -->
+                
+           
+                 <!-- <td><a th:href="${'/scoreboard/edit/' + scoreboard.id}">Edit</a></td>
+                <td><a th:href="${'/scoreboard/delete/' + scoreboard.id}">Delete</a></td> -->
+            </tr>
+        </table>
+    </div>
+     <div class="panel-heading">
+                <span th:utext="${userName}"></span>
+            </div>
+</div>
+
+</body>
+</html>

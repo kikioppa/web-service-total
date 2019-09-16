@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>게시판</title>
+<style>
+#notifyContent {
+	color: black;
+}
+
+#notifyContent:hover {
+	color: #c3783d;
+	text-decoration: none;
+}
+
+th {
+	text-align: center;
+}
+
+tr {
+	border-bottom: 2px solid lightgray;
+}
+
+a.before#reviewList:before, a.after#reviewList:after {
+	content: "";
+	position: absolute;
+	bottom: -0.25em;
+	height: 0.35rem;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="hostPage_content">
+	<div th:if="${#lists.size(reviewList)==0}" style="padding-top: 33px;" align="center">
+			<p class="heading">등록된 리뷰가 없습니다.</p>
+			<img src="https://image.flaticon.com/icons/svg/1071/1071285.svg" width="60px" height="60px">
+		</div>
+		<div th:if="${#lists.size(reviewList)>0}">
+		<table width="800px">
+			<tr height="80px" align="center" style="background: #f1f1fb;">
+				<th>리뷰번호</th>
+				<th>알림 내용</th>
+				<th>작성일</th>
+				<th width="100px">답변 여부</th>
+			</tr>
+			<tr th:each="reviewVO : ${reviewList}" align="center"
+				height="80px">
+				<td th:text="${reviewVO.reviewNo}"></td>
+				<td><a id="notifyContent"
+					th:href="@{/room/roomInfo(guestHouseCode=${reviewVO.guestHouseCode}, bookingStart=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}, bookingEnd=${tomorrow}, bookingNumber=1)}">[[${reviewVO.guestHouseName}]]에서
+						[[${reviewVO.writer}]]님이 리뷰를 작성하였습니다.</a></td>
+				<td th:text="${#dates.format(reviewVO.writingDate, 'yy.MM.dd')}"></td>
+				<td th:text="${reviewVO.replyContent}==null ? N : Y"></td>
+			</tr>
+		</table>
+
+		<!-- 게시판 하단의 페이징 버튼 -->
+		<div class="box-footer clearfix" style="padding-left: 357px">
+			<ul class="pagination pagination-sm no-margin pull-center">
+
+				<li th:if="${pageMaker.prev} == true"><a
+					th:href="@{/board/reviewList(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&laquo;</a>
+				</li>
+
+				<li
+					th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}"
+					th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
+					<a th:if="${idx}"
+					th:href="@{/board/reviewList(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}"
+					th:text="${idx}"></a>
+				</li>
+
+				<li th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
+					<a
+					th:href="@{/board/reviewList(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&raquo;</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

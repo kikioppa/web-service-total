@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="fragments/myPage_layout">
+<head>
+<title>글쓰기</title>
+<meta http-equiv="Content-Type" content="charset=UTF-8" />
+<style type="text/css">
+.modal-header {
+	background: #33425d;
+	color: white;
+}
+
+p {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+th {
+	text-align: center;
+}
+
+/* 별점 */
+.star-input>.input, .star-input>.input>label:hover, .star-input>.input>input:focus+label,
+	.star-input>.input>input:checked+label {
+	display: inline-block;
+	vertical-align: middle;
+	background: url('/img/grade_img.png') no-repeat;
+}
+
+.star-input {
+	display: inline-block;
+	white-space: nowrap;
+	width: 225px;
+	height: 40px;
+	line-height: 30px;
+}
+
+.star-input>.input {
+	display: inline-block;
+	width: 150px;
+	background-size: 150px;
+	height: 28px;
+	white-space: nowrap;
+	overflow: hidden;
+	position: relative;
+}
+
+.star-input>.input>input {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.star-input>.input.focus {
+	outline: 1px dotted #ddd;
+}
+
+.star-input>.input>label {
+	width: 30px;
+	height: 0;
+	padding: 28px 0 0 0;
+	overflow: hidden;
+	float: left;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.star-input>.input>label:hover, .star-input>.input>input:focus+label,
+	.star-input>.input>input:checked+label {
+	background-size: 150px;
+	background-position: 0 bottom;
+}
+
+.star-input>.input>label:hover ~label {
+	background-image: none;
+}
+
+.star-input>.input>label[for="p1"] {
+	width: 15px;
+	z-index: 10;
+}
+
+.star-input>.input>label[for="p2"] {
+	width: 30px;
+	z-index: 9;
+}
+
+.star-input>.input>label[for="p3"] {
+	width: 45px;
+	z-index: 8;
+}
+
+.star-input>.input>label[for="p4"] {
+	width: 60px;
+	z-index: 7;
+}
+
+.star-input>.input>label[for="p5"] {
+	width: 75px;
+	z-index: 6;
+}
+
+.star-input>.input>label[for="p6"] {
+	width: 90px;
+	z-index: 5;
+}
+
+.star-input>.input>label[for="p7"] {
+	width: 105px;
+	z-index: 4;
+}
+
+.star-input>.input>label[for="p8"] {
+	width: 120px;
+	z-index: 3;
+}
+
+.star-input>.input>label[for="p9"] {
+	width: 135px;
+	z-index: 2;
+}
+
+.star-input>.input>label[for="p10"] {
+	width: 150px;
+	z-index: 1;
+}
+
+.star-input>output {
+	display: inline-block;
+	width: 45px;
+	font-size: 18px;
+	text-align: right;
+	vertical-align: middle;
+}
+
+tr {
+    border-bottom: 2px solid lightgray;
+}
+
+a.before#bookingList:before,a.after#bookingList:after {
+   content: "";
+  position:absolute;
+  bottom:-0.25em;
+  height:0.35rem;
+  width:100%;
+}
+
+.btn-sm {
+	padding: 10px 15px;
+}
+
+#reviewForm>label {
+	font-size: 18px;
+	margin: 0 3px 5px 3px;
+}
+
+</style>
+</head>
+<body>
+
+		
+			<!-- writeReivew Modal -->
+			<div id="writeReviewModal" class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+				<div class="modal-dialog modal-sm modal-notify modal-danger" role="document" style="width: 507px;">
+					<!-- Modal content -->
+					<div class="modal-content text-center">
+						
+						<!--Header-->
+						<div class="modal-header d-flex justify-content-center">
+							<p style="font-size: 31px; margin: 0px;">후기 작성하기</p>
+						</div>
+						
+						<!--Body-->
+						<div class="modal-body">
+							<form th:action="@{/myPage/writeReview}" id="reviewForm" method="post">
+								<input type="hidden" name="bookingCode"> 
+								<label>작성자</label>
+								<input type="hidden" name="memberCode"> 
+								<label>[[${session.name}]]</label><br>
+
+								<label>평점</label> <span class="star-input"> <span
+									class="input"> <input type="radio" name="rating"
+										value="1" id="p1"> <label for="p1">1</label> <input
+										type="radio" name="rating" value="2" id="p2"> <label
+										for="p2">2</label> <input type="radio" name="rating"
+										value="3" id="p3"> <label for="p3">3</label> <input
+										type="radio" name="rating" value="4" id="p4"> <label
+										for="p4">4</label> <input type="radio" name="rating"
+										value="5" id="p5"> <label for="p5">5</label> <input
+										type="radio" name="rating" value="6" id="p6"> <label
+										for="p6">6</label> <input type="radio" name="rating"
+										value="7" id="p7"> <label for="p7">7</label> <input
+										type="radio" name="rating" value="8" id="p8"> <label
+										for="p8">8</label> <input type="radio" name="rating"
+										value="9" id="p9"> <label for="p9">9</label> <input
+										type="radio" name="rating" value="10" id="p10"> <label
+										for="p10">10</label>
+								</span> <output for="star-input">
+										<b>0</b>점
+									</output>
+								</span> <br> <br> <label>제목</label><br> <input
+									name="title" type="text" size="50" maxlength="30" required><br>
+								<label>내용</label><br>
+								<textarea id="content" name="content" rows="8" cols="50"
+									maxlength="500" required></textarea>
+								<br> <input type="button" id="writeReviewModalClose" class="btn btn-info waves-effect"
+									value="취소" data-dismiss="modal"> <input type="button" id="completedReviewBtn"
+									class="btn btn-info waves-effect" value="작성완료">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- writeReivew Modal -->
+
+			<!-- 게시판 하단의 페이징 버튼 -->
+			<div class="box-footer clearfix" style="padding-left: 357px">
+				<ul class="pagination pagination-sm no-margin pull-center">
+
+					<li th:if="${pageMaker.prev} == true">
+						<a th:href="@{/myPage/bookingList(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.cri.perPageNum})}">&laquo;</a>
+					</li>
+
+					<li th:each="idx,iterStat : ${#numbers.sequence(pageMaker.startPage,pageMaker.endPage)}" th:classappend="${pageMaker.cri.page} == ${idx} ? active : null">
+						<a th:href="@{/myPage/bookingList(page=${idx},perPageNum=${pageMaker.cri.perPageNum})}" th:text="${idx}"></a>
+					</li>
+
+					<li th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
+						<a th:href="@{/myPage/bookingList(page=${pageMaker.endPage}+1,perPageNum=${pageMaker.cri.perPageNum})}">&raquo;</a>
+					</li>
+
+				</ul>
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<div layout:fragment="myPage_script">
+		<script th:inline="javascript" type="text/javascript">
+			//취소요청 확인창 모달
+			var cancelConfirmModal = document
+					.getElementById('cancelConfirmModal');
+
+			$('.starRev span').click(function() {
+				$(this).parent().children('span').removeClass('on');
+				$(this).addClass('on').prevAll('span').addClass('on');
+				return false;
+			});
+
+			function onClick(bookingCode) {
+				$.ajax({
+					type : "GET",
+					url : "requestBookingCancel",
+					data : {
+						"bookingCode" : bookingCode
+					},
+					success : function() {
+						location.reload();
+					}
+				})
+			}
+			
+			function writeReview(index) {
+				var bookingDto = [[${bookingList}]][index];
+
+				$('#reviewForm')[0].reset();
+				$('input[name=bookingCode]').val(bookingDto.bookingCode);
+				$('input[name=memberCode]').val(bookingDto.memberCode);
+				
+				$('#writeReviewModal').modal();
+			}
+			
+			$("#completedReviewBtn").click(function() {
+				if($('input[name=title]').val()=='') {
+					$('input[name=title]').focus();
+					return;
+				} else if ($('textarea[name=content]').val()=='') {
+					$('textarea[name=content]').focus();
+					return;
+				}
+				
+				$('#writeReviewModal').modal('hide'); //모달 창 닫음
+				
+				//리뷰 내용
+				var str = document.getElementById("content").value;
+				str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+				document.getElementById("content").value = str;
+				
+				$("#reviewForm").submit();
+			})
+		</script>
+		<script th:inline="javascript" type="text/javascript">
+			var starRating = function() {
+				var $star = $(".star-input"), $result = $star.find("output>b");
+
+				$(document).on("focusin", ".star-input>.input", function() {
+					$(this).addClass("focus");
+				})
+
+				.on("focusout", ".star-input>.input", function() {
+					var $this = $(this);
+					setTimeout(function() {
+						if ($this.find(":focus").length === 0) {
+							$this.removeClass("focus");
+						}
+					}, 100);
+				})
+
+				.on("change", ".star-input :radio", function() {
+					$result.text($(this).next().text());
+				}).on("mouseover", ".star-input label", function() {
+					$result.text($(this).text());
+				}).on("mouseleave", ".star-input>.input", function() {
+					var $checked = $star.find(":checked");
+					if ($checked.length === 0) {
+						$result.text("0");
+					} else {
+						$result.text($checked.next().text());
+					}
+				});
+			};
+
+			starRating();
+		</script>
+	</div>
+
+
+
+
+</body>
+</html>
