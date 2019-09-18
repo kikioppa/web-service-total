@@ -4,13 +4,19 @@ package org.salem.controller;
 
 import org.salem.service.ScoreBoardService;
 
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.salem.login.model.ScoreBoard;
 import org.salem.login.model.User;
 import org.salem.login.service.UserService;
+import org.salem.service.ScoreBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -28,6 +34,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ScoreBoardController {
 
+
+	
     private ScoreBoardService scoreBoardService;
 
     @Autowired
@@ -42,16 +50,17 @@ public class ScoreBoardController {
      * @return
      */
     @RequestMapping(value = "/scoreboards", method = RequestMethod.GET)
-    public ModelAndView list(Model model, HttpSession session) {
+    public String list(@PageableDefault Pageable pageable ,Model model, HttpSession session) {
     	ModelAndView modelAndView = new ModelAndView();
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = UserService.findByEmail(auth.getName());
         modelAndView.addObject("userName", user.getName() + "님 접속중" );
         modelAndView.setViewName("/scoreboards");
-        model.addAttribute("scoreboards", scoreBoardService.listAllScoreBoards());
+        model.addAttribute("scoreboards", scoreBoardService.findBoardList(pageable));
+        					//("boardList", boardService.findBoardList(pageable));
         model.addAttribute("name",user.getName());
         System.out.println("Returning rpoducts:");
-        return modelAndView;
+        return "scoreboards";
     }
 
     /**

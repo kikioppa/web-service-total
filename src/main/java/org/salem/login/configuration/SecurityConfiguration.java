@@ -31,7 +31,7 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.CompositeFilter;
-
+import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.salem.login.configuration.ClientResources;
 import org.salem.login.configuration.CustomLoginSuccessHandler;
 
@@ -111,7 +111,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    return new CustomLoginSuccessHandler("/");
 	}
     
-   
+    @Bean
+    public SpringDataDialect springSecurityDialect() {
+        return new SpringDataDialect();
+    }
  
 
 

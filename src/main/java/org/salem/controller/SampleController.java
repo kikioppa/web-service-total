@@ -45,12 +45,19 @@ public class SampleController {
     }
     
     @RequestMapping("/")
+    public String index(Model model){
+    	
+        return "/fragments/header";
+    }
+    
+    
+    @RequestMapping("/datepicker")
     public String viewTest(Model model){
     	KakaoPayReadyVO  kakaoPayReadyVO =new KakaoPayReadyVO();
     	model.addAttribute("name2", kakaoPayReadyVO);
     	model.addAttribute("name", "dfdfdsf");
     	
-        return "scoreboards";
+        return "datepicker";
     }
     
     

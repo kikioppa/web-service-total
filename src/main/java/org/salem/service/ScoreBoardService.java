@@ -1,6 +1,9 @@
 package org.salem.service;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +13,7 @@ import org.salem.login.model.ScoreBoard;
 
 @Service
 public interface ScoreBoardService {
-
+	
     Iterable<ScoreBoard> listAllScoreBoards();
 
     ScoreBoard getScoreBoardById(Integer id);
@@ -19,9 +22,10 @@ public interface ScoreBoardService {
 
     void deleteScoreBoard(Integer id);
     
-   // public void getSession(Authentication auth,HttpSession session);
+    //void updatHit(String param);
+    
+    Page<ScoreBoard> findBoardList(Pageable pageable);
 
-  //  public int total();
     
-    
+   
 }

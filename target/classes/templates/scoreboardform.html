@@ -5,12 +5,21 @@
     <title>Spring Boot Example</title>
 
     <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+  	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+  	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+  	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+	  <!-- sd -->
+	<link href="summernote.css" rel="stylesheet">
+	<script src="summernote.min.js"></script>
+	<!-- include summernote-ko-KR -->
+	<script src="lang/summernote-ko-KR.js"></script>
 </head>
 
 
 <body>
 <div class="container">
-
 
     <h2>scoreboard Details</h2>
 
@@ -27,7 +36,7 @@
         </div> 
  
                
-                <div class="col-sm-10">
+                <div class="col-sm-3">
                     <input type="text" class="form-control" th:field="*{title}"/>
                 </div>
             <div class="form-group">
@@ -39,24 +48,27 @@
                 </div>
             </div>
        
-            <div class="form-group">
-                <label class="col-sm-2 control-label">content:</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{content}"/>
-                </div>
-            </div>
-        
-            
+       
+        	<label class="col-sm-1 control-label">content:</label>
+               
+            <div class="col-sm-10"> 
+            <textarea class="form-group" id="summernote" th:field="*{content}">
+        </textarea>
+        </div>
             <div class="row">
                 <button type="submit" class="btn btn-default">Submit</button>
             </div>
-           
-                 
-            
-            
+  
         </form>
     </div>
 </div>
-
+						<!-- script -->
+								
+								<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+    
+  </script>
 </body>
 </html>
