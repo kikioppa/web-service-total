@@ -2,6 +2,7 @@ package org.salem.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import javax.validation.Valid;
 
 
@@ -43,8 +44,9 @@ public class LoginController {
     private EmailSenderService emailSenderService;
     
     @RequestMapping(value={"/login"}, method = RequestMethod.GET)
-    public ModelAndView login(){
+    public ModelAndView login(User user,HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
+        
         modelAndView.setViewName("login");
         return modelAndView;
     }

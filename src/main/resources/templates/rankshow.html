@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+ <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<link rel="stylesheet" href="/css/theme.default.css">
+
+<script type="text/javascript" src="/js/jquery.tablesorter.js"></script>
+
+<!-- tablesorter widgets -->
+<script type="text/javascript" src="/js/jquery.tablesorter.widgets.js"></script>
+<script src="js/jquery.tablesorter.widgets.min.js"></script>
+</head>
+
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+   
+
+<button type="button">리셋</button>
+<br>
+<table class="tablesorter">
+  
+  <thead>
+    <tr>
+      <th>순위</th>
+      <th>평균 AVG</th>
+      <th class="sorter-ignoreArticles">이름</th>
+      <th>게임수</th>
+      <th>순위변동</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td>9.2</td>
+      <td><a href="http://www.imdb.com/title/tt0111161/">The Shawshank Redemption</a> (1994)</td>
+      <td>734,327</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td>9.2</td>
+      <td><a href="http://www.imdb.com/title/tt0068646/">The Godfather</a> (1972)</td>
+      <td>548,857</td>
+    </tr>
+    <tr>
+      <td>3.</td>
+      <td>9.0</td>
+      <td><a href="http://www.imdb.com/title/tt0071562/">The Godfather: Part II</a> (1974)</td>
+      <td>346,072</td>
+    </tr>
+    <tr>
+      <td>4.</td>
+      <td>8.9</td>
+      <td><a href="http://www.imdb.com/title/tt0110912/">Pulp Fiction</a> (1994)</td>
+      <td>577,426</td>
+    </tr>
+    <tr>
+      <td>5.</td>
+      <td>8.9</td>
+      <td><a href="http://www.imdb.com/title/tt0060196/">The Good, the Bad and the Ugly</a> (1966)</td>
+      <td>229,564</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<script>
+$(function() {
+
+	  // call the tablesorter plugin
+	  $("table").tablesorter({
+	 
+
+	    // use save sort widget
+	    widgets: ["saveSort", "zebra"]
+
+	  });
+
+	  $('button').click(function(){
+	    $('table')
+	      .trigger('saveSortReset') // clear saved sort
+	      .trigger("sortReset");    // reset current table sort
+	    return false;
+	  });
+
+	});
+</script>
+</body>
+</html>

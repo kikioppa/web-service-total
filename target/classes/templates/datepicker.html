@@ -6,7 +6,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>jQuery UI Datepicker - Default functionality</title>
+  <th:block th:include="fragments/headerinc :: head"></th:block>
+  <title>간편예약</title>
 
 <style>
 <!-- 퀀티티 버튼 -->
@@ -142,7 +143,9 @@ function down2(min) {
 
 <body>
 
-				
+
+<div class="container">
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 <!--  -->
 <form method="post" action="/kakaoPay">	 
 <div class="form-group">
@@ -208,7 +211,7 @@ function down2(min) {
     <button type="submit" name="paybutton" id="paytubbon"> 카카오페이</button>
 </form>
 
-
+</div>
 <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </body>
 </html>

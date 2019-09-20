@@ -37,8 +37,10 @@
                <!--  <td th:text="${scoreboard.name}">descirption</td>  -->
                 
            
-                 <!-- <td><a th:href="${'/scoreboard/edit/' + scoreboard.id}">Edit</a></td>
-                <td><a th:href="${'/scoreboard/delete/' + scoreboard.id}">Delete</a></td> -->
+                 <!-- <td><a th:href="${'/scoreboard/edit/' + scoreboard.id}">Edit</a></td>-->
+                
+                
+                <td><a th:href="${'/scoreboard/delete/' + scoreboard.id}" th:if="${session.name != null && session.name.getName() == scoreboard.name}">Delete</a></td>
             </tr>
         </table>
     </div>

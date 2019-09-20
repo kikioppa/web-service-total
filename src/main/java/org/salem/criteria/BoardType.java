@@ -1,8 +1,8 @@
 package org.salem.criteria;
 
 public enum BoardType {
-	  notice("공지사항"),
-	  free("자유게시판");
+	  공지사항("공지사항"),
+	  요청("자유게시판");
 
 	
 	 private final String value;

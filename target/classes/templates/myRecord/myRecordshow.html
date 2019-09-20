@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Spring Boot Exemple</title>
+ 	<!--  <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />  -->
+    <th:block th:include="fragments/headerinc :: head"></th:block>
+</head>
+<body>
+<div class="container">
+    <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+    <div th:if="${not #lists.isEmpty(products)}">
+        <h2>게시글 목록</h2>
+        <table class="table table-striped">
+        
+            <tr>
+            
+            	<th style="width: 20%">글번호 </th>
+                <th>분류</th>
+                <th>제목</th>
+                <th>글쓴이</th>
+                <th>날짜</th>
+                <th>조회</th>
+          <!--  <th>View</th>
+                <th>Edit</th>
+                <th>Delete</th>  ..... -->
+            </tr>
+            
+            <p><a href="#" th:href="@{/product/new}">글쓰기</a></p>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"><a href="/product/${product.id}">글번호</a></td>
+                <td th:text="${product.boardType}">분류</td>
+                <td><a th:href="${ '/product/' + product.id}" th:text="${product.title}"></a></td>
+                <td th:text="${product.name}">글쓴이</td>
+    
+               <!--  <td th:text="${product.name}">descirption</td>  -->
+                
+           
+                <!-- <td><a th:href="${'/product/edit/' + product.id}">Edit</a></td>-->
+                <td><a th:href="${'/product/delete/' + product.id}">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    
+</div>
+    
+
+
+</body>
+</html>
