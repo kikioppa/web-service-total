@@ -10,7 +10,7 @@
 <div class="container">
     <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
-    <h2>scoreboard Details</h2>
+    <h2>Details</h2>
         <div>
             <form class="form-horizontal">
                 <div class="form-group">
@@ -30,7 +30,8 @@
                         <p class="form-control-static" th:text="${scoreboard.content}">content</p>
                     </div>
                 </div>
-                
+                  <td><a th:if="${name == scoreboard.name}" th:href="${'/scoreboard/delete/' + scoreboard.id}">Delete</a></td>
+                  <td><a th:if="${name == scoreboard.name}" th:href="${'/scoreboard/edit/' + scoreboard.id}">Edit</a></td>
             </form>
     </div>
 </div>

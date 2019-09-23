@@ -52,12 +52,7 @@ public class SampleController {
     
     
     
-    @RequestMapping("/rankshow")
-    public String rankshow(Model model){
-    	
-        return "rankshow";
-    }
-    
+
     
     @RequestMapping("/datepicker")
     public String viewTest(Model model){

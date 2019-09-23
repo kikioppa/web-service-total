@@ -1,6 +1,7 @@
 package org.salem.login.model;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 
 
@@ -27,26 +28,23 @@ import java.util.UUID;
 @Entity
 @Data
 //@Cache(usage = version.NONSTRICT_READ_WRITE)
-@Table(name = "product")
-public class Product {
+@Table(name = "record")
+public class Record {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Version
-    private Integer version;
-
-    private String productId;
+    private Integer rank;
+    private BigDecimal avg;
     private String name;
-    private BigDecimal price;
-    private BigDecimal total;
+    private Integer variance;
     //@ManyToOne(cascade = CascadeType.ALL)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 
 
-    public Product() {
+    public Record() {
     	
         createdDate = new Date();
         

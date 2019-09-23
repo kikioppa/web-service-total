@@ -3,18 +3,18 @@ package org.salem.login.repository;
 
 
 
-import org.salem.login.model.Product;
+import org.salem.login.model.Record;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 
-@Repository("productdRepository")
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+@Repository("recordRepository")
+public interface RecordRepository extends JpaRepository<Record, Integer> {
 
 	
 	
 	
-	Product findAllById(Integer id);
+	Record findAllById(Integer id);
 	
 	
 	//@Query(value = "SELECT numb1 + numb2 as total FROM ScoreBoard", nativeQuery =true)

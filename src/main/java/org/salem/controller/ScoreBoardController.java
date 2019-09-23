@@ -74,7 +74,10 @@ public class ScoreBoardController {
      */
     @RequestMapping("scoreboard/{id}")
     public String showScoreBoard(@PathVariable Integer id, Model model) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = UserService.findByEmail(auth.getName());
         model.addAttribute("scoreboard", scoreBoardService.getScoreBoardById(id));
+        model.addAttribute("name",user.getName());
         return "scoreboardshow";
     }
 

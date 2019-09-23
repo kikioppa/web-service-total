@@ -1,8 +1,7 @@
 package org.salem.controller;
 
 import javax.servlet.http.HttpServletRequest;
-
-
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -44,10 +43,13 @@ public class LoginController {
     private EmailSenderService emailSenderService;
     
     @RequestMapping(value={"/login"}, method = RequestMethod.GET)
-    public ModelAndView login(User user,HttpServletRequest request){
+    public ModelAndView login(User user,HttpSession session,HttpServletRequest request){
         ModelAndView modelAndView = new ModelAndView();
-        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User writer = UserService.findByEmail(auth.getName());
         modelAndView.setViewName("login");
+        String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevPage", referrer);
         return modelAndView;
     }
 

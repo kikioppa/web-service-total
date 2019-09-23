@@ -22,8 +22,6 @@ public interface ScoreBoardService {
 
     void deleteScoreBoard(Integer id);
     
-    //void updatHit(String param);
-    
     Page<ScoreBoard> findBoardList(Pageable pageable);
 
     
