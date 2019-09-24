@@ -8,4 +8,3 @@ org\salem\domain\CardVO.class
 org\salem\domain\reviewVO.class
 org\salem\domain\BookingVO.class
 org\salem\domain\KakaoPayReadyVO.class
-org\salem\criteria\AdminPageCriteria.class
