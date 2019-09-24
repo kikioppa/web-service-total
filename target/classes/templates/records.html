@@ -28,17 +28,18 @@
   
   <thead>
     <tr>
-      <th>순위</th>
       <th>평균 AVG</th>
       <th class="sorter-ignoreArticles">이름</th>
       <th>게임수</th>
-      <th>순위변동</th>
+      <th>총점</th>
     </tr>
   </thead>
   <tbody>
-     <tr th:each="product : ${products}">
-                <td th:text="${product.id}"><a href="/product/${product.id}">글번호</a></td>
-                <td th:text="${product.name}">글쓴이</td>
+     <tr th:each="record : ${records}">
+                <td th:text="${record.avg}"><a href="/record/${record.avg}">평균</a></td>
+                <td th:text="${record.name}">이름</td>
+                <td th:text="${record.game}">게임수</td>
+                <td th:text="${record.total}">총점</td>
     
     
   </tbody>

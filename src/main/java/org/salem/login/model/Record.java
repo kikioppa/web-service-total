@@ -2,6 +2,7 @@ package org.salem.login.model;
 
 import javax.persistence.CascadeType;
 
+
 import javax.persistence.Entity;
 
 
@@ -35,10 +36,10 @@ public class Record {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private Integer rank;
-    private BigDecimal avg;
+    private Integer game;
+    private long avg;
     private String name;
-    private Integer variance;
+    private Integer total;
     //@ManyToOne(cascade = CascadeType.ALL)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;

@@ -2,14 +2,18 @@ package org.salem.controller;
 
 
 import org.salem.login.model.Record;
-
-
+import org.salem.login.model.User;
+import org.salem.login.service.UserService;
 import org.salem.service.RecordService;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -75,8 +79,11 @@ public class RecordController {
      * @return
      */
     @RequestMapping("record/new")
-    public String newProduct(Model model) {
+    public String newProduct(Model model,HttpSession session) {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = UserService.findByEmail(auth.getName());
         model.addAttribute("record", new Record());
+        model.addAttribute("name",user.getName());
         return "myRecord/myRecordform";
     }
 
@@ -89,7 +96,7 @@ public class RecordController {
     @RequestMapping(value = "record", method = RequestMethod.POST)
     public String saveProduct(Record record) {
     	recordService.saveRecord(record);
-        return "redirect:";
+        return "redirect:records";
     }
 
     /**
